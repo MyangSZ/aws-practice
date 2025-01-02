@@ -1,0 +1,5 @@
+name: Github Action 실행시켜보기
+
+on:
+  push:
+    branchers: -main
