@@ -47,4 +47,7 @@ jobs:
         run: npm run build
 
       - name: 빌드 확인하기
-        run: ls
+        run: |
+          ls
+          cd dist
+          ls
