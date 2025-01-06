@@ -1,30 +1,44 @@
-# WorkFlow
-name: Github Action 실행시켜보기
+# # WorkFlow
+# name: Github Action 실행시켜보기
+
+# on:
+#   push:
+#     branchers: -main
+
+# # workflow는 여러개의 jpb로 이루어 질수 있다.
+# jobs:
+#   My-Deploy-Job:
+#     runs-on: ubuntu-latest
+#     # 하나의 jpb는 여러개의 step으로 이루어져 있다.
+#     steps:
+#       - name: Hello World 출력하기
+#         run: echo "Hello World"
+
+#       - name: 여러 명렁어 문장 작성하기
+#         run: |
+#           echo "Hi"
+#           echo "안녕"
+#           pwd
+#       - name: Gitbub Actions 자체 저장되어 있는 변수 사용하기
+#         run: |
+#           echo $GITHUB_REPOSITORY
+#           echo $GITHUB_SHA
+
+#       - name: Github Actions Secret 변수 사용하기-셋팅적용
+#         run: |
+#           echo ${{secrets.MY_NAME}}
+#           echo ${{secrets.MY_HOBBY}}
+
+name: Deploy TO S3 And Inbalidate CLoudfront
 
 on:
   push:
-    branchers: -main
+    branches:
+      - main
 
-# workflow는 여러개의 jpb로 이루어 질수 있다.
 jobs:
-  My-Deploy-Job:
+  deploy:
     runs-on: ubuntu-latest
-    # 하나의 jpb는 여러개의 step으로 이루어져 있다.
     steps:
-      - name: Hello World 출력하기
-        run: echo "Hello World"
-
-      - name: 여러 명렁어 문장 작성하기
-        run: |
-          echo "Hi"
-          echo "안녕"
-          pwd
-      - name: Gitbub Actions 자체 저장되어 있는 변수 사용하기
-        run: |
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_SHA
-
-      - name: Github Actions Secret 변수 사용하기-셋팅적용
-        run: |
-          echo ${{secrets.MY_NAME}} 
-          echo ${{secrets.MY_HOBBY}}
+      - name: Github Repository 파일 불러오기
+        uses: actions/checkout@v4
